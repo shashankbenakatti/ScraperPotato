@@ -1,0 +1,39 @@
+name = "airbnb-job-scraper"
+main = "src/worker.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Environment variables will be set via Cloudflare dashboard or wrangler secret
+# Don't put sensitive values here
+
+[env.production]
+name = "airbnb-job-scraper-prod"
+
+[env.staging]
+name = "airbnb-job-scraper-staging"
+
+# Cron trigger - runs every 2 days at midnight UTC
+[[triggers]]
+crons = ["0 0 */2 * *"]
+
+# KV namespace for storing job data and hashes
+[[kv_namespaces]]
+binding = "JOB_STORAGE"
+id = "your-kv-namespace-id"
+preview_id = "your-preview-kv-namespace-id"
+
+# Durable Objects for state management (optional, for advanced usage)
+# [[durable_objects.bindings]]
+# name = "JOB_TRACKER"
+# class_name = "JobTracker"
+
+# Limits and compatibility
+[limits]
+cpu_ms = 30000  # 30 seconds max execution time
+
+[build]
+command = "npm run build:worker"
+
+# For local development
+[vars]
+ENVIRONMENT = "development"

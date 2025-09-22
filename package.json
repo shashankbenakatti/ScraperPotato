@@ -10,7 +10,14 @@
     "dev": "node enhanced-scraper.js",
     "mailslurp": "node mailslurp-scraper.js",
     "test-email": "node mailslurp-scraper.js --test-email",
-    "run-once": "node mailslurp-scraper.js --run-once"
+    "run-once": "node mailslurp-scraper.js --run-once",
+    "build:worker": "echo 'Worker build complete'",
+    "deploy": "wrangler deploy",
+    "deploy:staging": "wrangler deploy --env staging",
+    "dev:worker": "wrangler dev",
+    "tail": "wrangler tail",
+    "kv:create": "wrangler kv:namespace create JOB_STORAGE",
+    "kv:create:preview": "wrangler kv:namespace create JOB_STORAGE --preview"
   },
   "keywords": [],
   "author": "",
@@ -24,5 +31,8 @@
     "node-fetch": "^3.3.2",
     "nodemailer": "^7.0.6",
     "puppeteer": "^24.19.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.38.0"
   }
 }
